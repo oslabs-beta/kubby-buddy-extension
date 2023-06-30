@@ -8,11 +8,10 @@ import React, {
     FC,
     useState,
   } from 'react';
-  import create from '../../assets/add-document.png';
+  import create from '../../../public/favicon.png';
   import * as Popover from '@radix-ui/react-popover';
   import * as Select from '@radix-ui/react-select';
   import * as Checkbox from '@radix-ui/react-checkbox';
-  import './CreatePopover.scss';
   import { Cross2Icon, CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons';
   import { CommandButtonProps } from '../../types';
   import { UserContext } from '../../UserContext';
