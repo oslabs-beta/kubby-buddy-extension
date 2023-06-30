@@ -4,61 +4,63 @@ import { CreateCommands } from '../../components/Button/Create';
 import { DeleteImageCommands } from '../Button/DeleteImage';
 import { Image } from '../../types';
 import Loader from '../Loader/Loader';
+import { ListItem, Typography, Box, Button } from '@mui/material';
 
 export const Images: FC = () => {
-  const { availableImages } = useContext(UserContext);
+	const { availableImages } = useContext(UserContext);
 
-  let images;
+	let images;
 
-  const StoppedContainer: React.FC<{ el: Image; index: number }> = React.memo(
-    ({ el, index }) => {
-      return (
-        <li className="listImage" key={index}>
-          <div className="image-info">
-            <p className="image-title">{el.Repository}</p>
-            <div className="image-subinfo">
-              <p>Containers: {el.Containers}</p>
-              <p>Time since created: {el.CreatedSince}</p>
-            </div>
-            <div className="image-subinfo">
-              <p>Created At: {el.CreatedAt}</p>
-              <p>Size: {el.Size}</p>
-            </div>
-            <div className="image-subinfo">
-              <p>Tag: {el.Tag}</p>
-              <p>ID: {el.ID}</p>
-            </div>
-          </div>
-          <div className="cmdbutton">
-            <DeleteImageCommands
-              id={el.ID}
-              cmdRoute={
-                new URL('/image/remove-image-by-name', window.location.href)
-              }
-              fetchMethod="delete"
-            />
-            <CreateCommands
-              name={el.Repository}
-              cmdRoute={new URL('/image/run-images', window.location.href)}
-              fetchMethod="post"
-            />
-          </div>
-        </li>
-      );
-    }
-  );
+    console.log(availableImages)
+	const StoppedContainer: React.FC<{ el: Image; index: number }> = React.memo(
+		({ el, index }) => {
+			return (
+				<ListItem className="listImage" key={index}>
+					<Box className="image-info">
+						<Typography className="image-title">{el.Repository}</Typography>
+						<Box className="image-subinfo">
+							<Typography>Containers: {el.Containers}</Typography>
+							<Typography>Time since created: {el.CreatedSince}</Typography>
+						</Box>
+						<Box className="image-subinfo">
+							<Typography>Created At: {el.CreatedAt}</Typography>
+							<Typography>Size: {el.Size}</Typography>
+						</Box>
+						<Box className="image-subinfo">
+							<Typography>Tag: {el.Tag}</Typography>
+							<Typography>ID: {el.ID}</Typography>
+						</Box>
+					</Box>
+					<Box className="cmdbutton">
+						<DeleteImageCommands
+							id={el.ID}
+							cmdRoute={
+								new URL('/image/remove-image-by-name', window.location.href)
+							}
+							fetchMethod="delete"
+						/>
+						<CreateCommands
+							name={el.Repository}
+							cmdRoute={new URL('/image/run-images', window.location.href)}
+							fetchMethod="post"
+						/>
+					</Box>
+				</ListItem>
+			);
+		}
+	);
 
-  if (typeof availableImages === 'string') {
-    images = <Loader />;
-  } else {
-    images = useMemo(
-      () =>
-        availableImages.map((el, index) => (
-          <StoppedContainer el={el} index={index} key={`image${index}`} />
-        )),
-      [availableImages]
-    );
-  }
+	if (typeof availableImages === 'string') {
+		images = <Loader />;
+	} else {
+		images = useMemo(
+			() =>
+				availableImages.map((el, index) => (
+					<StoppedContainer el={el} index={index} key={`image${index}`} />
+				)),
+			[availableImages]
+		);
+	}
 
-  return <div className="imagescontainer">{images}</div>;
+	return <div className="imagescontainer">{images}</div>;
 };

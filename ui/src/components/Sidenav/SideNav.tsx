@@ -26,7 +26,7 @@ export const SideNav: FC = () => {
 		async function getRunningContainers() {
             try {
                 let data: any 
-                ddClient.docker.cli.exec('ps', ['--all', '--format', '"{{json .}}"'])
+                await ddClient.docker.cli.exec('ps', ['--all', '--format', '"{{json .}}"'])
                 .then(result => data = result.parseJsonLines())
                     
                 //     await promisifyExec(
@@ -36,6 +36,7 @@ export const SideNav: FC = () => {
 				// const fetchResponse = await fetch(getURL);
 				// const data: Container[] = await fetchResponse.json();
                
+				console.log(data)
 
 				setRunningContainers(
 					data?.filter((container: any) => container.State !== 'exited')
@@ -50,7 +51,7 @@ export const SideNav: FC = () => {
 		async function getAvailableImages() {
             try {
                 let data: any 
-                ddClient.docker.cli.exec('images', ['--format', '"{{json .}}"'])
+                await ddClient.docker.cli.exec('images', ['--format', '"{{json .}}"'])
                 .then(result => data = result.parseJsonLines())
 				// const getURL = 'image/all-images';
 				// const fetchResponse = await fetch(getURL);
