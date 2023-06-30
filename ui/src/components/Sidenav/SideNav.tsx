@@ -69,9 +69,13 @@ export const SideNav: FC = () => {
     }
     async function getAvailableVolumes() {
       try {
-        const getURL = 'volume/all-volumes';
-        const fetchResponse = await fetch(getURL);
-        const data = await fetchResponse.json();
+        let data: any;
+        await ddClient.docker.cli
+          .exec('volume', ['ls', '--format', '"{{json .}}"'])
+          .then((result) => (data = result.parseJsonLines()));
+        // const getURL = 'volume/all-volumes';
+        // const fetchResponse = await fetch(getURL);
+        // const data = await fetchResponse.json();
 
         setAvailableVolumes(data);
       } catch (error) {
