@@ -8,9 +8,8 @@ import { GlobalCommands } from '../GlobalCommands/GlobalCommands';
 import { UserContext } from '../../UserContext';
 import favicon from '../../../public/favicon.png';
 import { Container } from '../../types';
-import { exec } from 'node:child_process';
-import { promisify } from 'util';
-const promisifyExec = promisify(exec);
+import { createDockerDesktopClient } from '@docker/extension-api-client';
+const ddClient = createDockerDesktopClient();
 
 export const SideNav: FC = () => {
 	// const testimage = require('../../assests/test.png')
@@ -25,33 +24,37 @@ export const SideNav: FC = () => {
 	useEffect(() => {
 		// INITIAL LOAD
 		async function getRunningContainers() {
-			try {
-				const { stdout, stderr } = await promisifyExec(
-					"docker ps -a --format '{{json .}}'"
-				);
+            try {
+                let data: any 
+                ddClient.docker.cli.exec('ps', ['--all', '--format', '"{{json .}}"'])
+                .then(result => data = result.parseJsonLines())
+                    
+                //     await promisifyExec(
+				// 	"docker ps -a --format '{{json .}}'"
+				// );
 				// const getURL = 'container/all-active-containers';
 				// const fetchResponse = await fetch(getURL);
 				// const data: Container[] = await fetchResponse.json();
-                const data = stdout
-                .trim()
-                .split('\n')
-                .map((item) => JSON.parse(item, undefined));
+               
 
 				setRunningContainers(
-					data.filter((container) => container.State !== 'exited')
+					data?.filter((container: any) => container.State !== 'exited')
 				);
 				setStoppedContainers(
-					data.filter((container) => container.State === 'exited')
+					data?.filter((container: any) => container.State === 'exited')
 				);
 			} catch (error) {
 				console.log(error);
 			}
 		}
 		async function getAvailableImages() {
-			try {
-				const getURL = 'image/all-images';
-				const fetchResponse = await fetch(getURL);
-				const data = await fetchResponse.json();
+            try {
+                let data: any 
+                ddClient.docker.cli.exec('images', ['--format', '"{{json .}}"'])
+                .then(result => data = result.parseJsonLines())
+				// const getURL = 'image/all-images';
+				// const fetchResponse = await fetch(getURL);
+				// const data = await fetchResponse.json();
 				console.log(data);
 				setAvailableImages(data);
 			} catch (error) {
