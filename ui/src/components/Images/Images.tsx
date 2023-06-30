@@ -4,63 +4,98 @@ import { CreateCommands } from '../../components/Button/Create';
 import { DeleteImageCommands } from '../Button/DeleteImage';
 import { Image } from '../../types';
 import Loader from '../Loader/Loader';
-import { ListItem, Typography, Box, Button } from '@mui/material';
+import { ListItem, Box, Typography, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 export const Images: FC = () => {
-	const { availableImages } = useContext(UserContext);
+  const { availableImages } = useContext(UserContext);
 
-	let images;
+  let images;
 
-    console.log(availableImages)
-	const StoppedContainer: React.FC<{ el: Image; index: number }> = React.memo(
-		({ el, index }) => {
-			return (
-				<ListItem className="listImage" key={index}>
-					<Box className="image-info">
-						<Typography className="image-title">{el.Repository}</Typography>
-						<Box className="image-subinfo">
-							<Typography>Containers: {el.Containers}</Typography>
-							<Typography>Time since created: {el.CreatedSince}</Typography>
-						</Box>
-						<Box className="image-subinfo">
-							<Typography>Created At: {el.CreatedAt}</Typography>
-							<Typography>Size: {el.Size}</Typography>
-						</Box>
-						<Box className="image-subinfo">
-							<Typography>Tag: {el.Tag}</Typography>
-							<Typography>ID: {el.ID}</Typography>
-						</Box>
-					</Box>
-					<Box className="cmdbutton">
-						<DeleteImageCommands
-							id={el.ID}
-							cmdRoute={
-								new URL('/image/remove-image-by-name', window.location.href)
-							}
-							fetchMethod="delete"
-						/>
-						<CreateCommands
-							name={el.Repository}
-							cmdRoute={new URL('/image/run-images', window.location.href)}
-							fetchMethod="post"
-						/>
-					</Box>
-				</ListItem>
-			);
-		}
-	);
+  const listItemStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '16px',
+    borderBottom: '1px solid #e0e0e0',
+  };
 
-	if (typeof availableImages === 'string') {
-		images = <Loader />;
-	} else {
-		images = useMemo(
-			() =>
-				availableImages.map((el, index) => (
-					<StoppedContainer el={el} index={index} key={`image${index}`} />
-				)),
-			[availableImages]
-		);
-	}
+  const imageInfoStyle = {
+    flex: 1,
+    marginRight: '16px',
+  };
 
-	return <div className="imagescontainer">{images}</div>;
+  const imageTitleStyle = {
+    fontSize: '18px',
+    fontWeight: 'bold',
+    marginBottom: '8px',
+  };
+
+  const imageSubinfoStyle = {
+    marginBottom: '4px',
+  };
+
+  const cmdbuttonStyle = {
+    display: 'flex',
+    gap: '8px',
+  };
+
+  const deleteButtonStyle = {
+    color: 'red',
+  };
+
+  const playButtonStyle = {
+    color: 'green',
+  };
+
+  const StoppedContainer: React.FC<{ el: Image; index: number }> = React.memo(({ el, index }) => {
+    return (
+      <ListItem style={listItemStyle} key={index}>
+        <Box style={imageInfoStyle} className="image-info">
+          <Typography variant="h6" style={imageTitleStyle} className="image-title">
+            {el.Repository}
+          </Typography>
+          <Box style={imageSubinfoStyle} className="image-subinfo">
+            <Typography>Containers: {el.Containers}</Typography>
+            <Typography>Time since created: {el.CreatedSince}</Typography>
+          </Box>
+				</Box>
+				<Box style={imageInfoStyle} className="image-info">
+          <Box style={imageSubinfoStyle} className="image-subinfo">
+            <Typography>Created At: {el.CreatedAt}</Typography>
+            <Typography>Size: {el.Size}</Typography>
+          </Box>
+				</Box>
+				<Box style={imageInfoStyle} className="image-info">
+          <Box style={imageSubinfoStyle} className="image-subinfo">
+            <Typography>Tag: {el.Tag}</Typography>
+            <Typography>ID: {el.ID}</Typography>
+          </Box>
+        </Box>
+        <Box style={cmdbuttonStyle} className="cmdbutton">
+          <IconButton style={deleteButtonStyle} className="delete-button">
+            <DeleteIcon />
+          </IconButton>
+          <IconButton style={playButtonStyle} className="play-button">
+            <PlayArrowIcon />
+          </IconButton>
+        </Box>
+      </ListItem>
+    );
+  });
+
+  if (typeof availableImages === 'string') {
+    images = <Loader />;
+  } else {
+    images = useMemo(() => availableImages.map((el, index) => <StoppedContainer el={el} index={index} key={`image${index}`} />), [availableImages]);
+  }
+
+  const imagesContainerStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+  };
+
+  return <div style={imagesContainerStyle}>{images}</div>;
 };

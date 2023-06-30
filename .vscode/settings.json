@@ -1,0 +1,7 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.useTabs": true,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 200,
+  "editor.tabSize": 2
+}
