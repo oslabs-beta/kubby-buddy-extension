@@ -6,9 +6,9 @@ import { DeleteCommands } from '../Button/Delete';
 import { LogCommands } from '../Button/Logs';
 // import { Graph } from '../Graph/Graph';
 // import LineGraph from '../LineGraph/Line';
-// import Donut1 from '../Donut/DonutCPU';
+import Donut1 from '../Donut/DonutCPU';
 import Loader from '../Loader/Loader';
-// import Donut2 from '../Donut/DonutMemory';
+import Donut2 from '../Donut/DonutMemory';
 import { Container } from '../../types';
 
 export const DisplayRunning: FC = () => {
@@ -64,7 +64,7 @@ export const DisplayRunning: FC = () => {
             />
           </div>
 
-          {/* <div className="chartContainer">
+          <div className="chartContainer">
             {statStream.length > 0 ? (
               <Donut1 className="bargraph" data={statStream[index]} />
             ) : (
@@ -80,15 +80,16 @@ export const DisplayRunning: FC = () => {
           </div>
           <div className="chartContainer">
             {statStream.length > 0 ? (
-              <LineGraph
-                className="bargraph"
-                data={statStream[index]}
-                change={change}
-              />
+            //   <LineGraph
+            //     className="bargraph"
+            //     data={statStream[index]}
+            //     change={change}
+            //   />
+            ''
             ) : (
               ''
             )}
-          </div> */}
+          </div>
         </div>
       );
     });

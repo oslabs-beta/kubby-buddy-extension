@@ -19,7 +19,12 @@
     "@mui/material": "5.10.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "classnames": "^2.3.2"
+    "classnames": "^2.3.2",
+    "chart.js": "^3.9.1",
+    "chartjs-adapter-luxon": "^1.2.0",
+    "chartjs-plugin-streaming": "^2.0.0",
+    "react-chartjs-2": "^4.3.1"
+
   },
   "scripts": {
     "dev": "vite",
