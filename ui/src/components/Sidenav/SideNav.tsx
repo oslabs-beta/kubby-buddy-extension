@@ -4,7 +4,6 @@
 
 */
 import React, { FC, useContext, useEffect } from 'react';
-import './SideNav.scss';
 import { GlobalCommands } from '../GlobalCommands/GlobalCommands';
 import { UserContext } from '../../UserContext';
 import favicon from '../../../public/favicon.png';
