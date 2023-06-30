@@ -60,10 +60,14 @@ export const Images: FC = () => {
             <Typography>Containers: {el.Containers}</Typography>
             <Typography>Time since created: {el.CreatedSince}</Typography>
           </Box>
+				</Box>
+				<Box style={imageInfoStyle} className="image-info">
           <Box style={imageSubinfoStyle} className="image-subinfo">
             <Typography>Created At: {el.CreatedAt}</Typography>
             <Typography>Size: {el.Size}</Typography>
           </Box>
+				</Box>
+				<Box style={imageInfoStyle} className="image-info">
           <Box style={imageSubinfoStyle} className="image-subinfo">
             <Typography>Tag: {el.Tag}</Typography>
             <Typography>ID: {el.ID}</Typography>
@@ -87,5 +91,11 @@ export const Images: FC = () => {
     images = useMemo(() => availableImages.map((el, index) => <StoppedContainer el={el} index={index} key={`image${index}`} />), [availableImages]);
   }
 
-  return <div className="imagescontainer">{images}</div>;
+  const imagesContainerStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+  };
+
+  return <div style={imagesContainerStyle}>{images}</div>;
 };

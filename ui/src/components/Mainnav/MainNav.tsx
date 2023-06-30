@@ -10,15 +10,15 @@ import { Box, Typography } from '@mui/material';
 //using a ternary based on booleans from useContext to switch the views
 
 export const MainNav: FC = () => {
-	const { showing } = useContext(UserContext);
+  const { showing } = useContext(UserContext);
 
-	return (
-		<Box className="main-nav">
-			<Typography component="ul">
-                {/* {showing === 'Containers' ? <DockerContainers /> : <Images />} */}
-                Image Component
-                <Images />
-			</Typography>
-		</Box>
-	);
+  return (
+    <Box className="main-nav">
+      <Typography component="ul">
+        {/* {showing === 'Containers' ? <DockerContainers /> : <Images />} */}
+        Image Component
+        <Images />
+      </Typography>
+    </Box>
+  );
 };
