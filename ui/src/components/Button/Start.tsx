@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import start from '../../assets/play.png';
+import start from '../../../public/favicon.png';
 
 import { CommandButtonProps } from '../../types';
 import { UserContext } from '../../UserContext';

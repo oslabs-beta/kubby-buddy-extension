@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import stop from '../../assets/stop.png';
+import stop from '../../../public/favicon.png';
 
 import { CommandButtonProps } from '../../types';
 import { UserContext } from '../../UserContext';

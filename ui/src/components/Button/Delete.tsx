@@ -1,7 +1,7 @@
 // /prune-stopped-containers
 
 import React, { useContext } from 'react';
-import trash from '../../assets/trash.png';
+import trash from '../../../public/favicon.png';
 import { UserContext } from '../../UserContext';
 
 import { CommandButtonProps } from '../../types';

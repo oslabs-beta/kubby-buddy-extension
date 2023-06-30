@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 // import React, { useState } from "react";
-import logs from '../../assets/memo-pad.png';
-import './Logs.scss';
+import logs from '../../../public/favicon.png';
 
 import { CommandButtonProps } from '../../types';
 
