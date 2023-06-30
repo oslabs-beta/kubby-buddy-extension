@@ -1,0 +1,3 @@
+services:
+  extension-2:
+    image: ${DESKTOP_PLUGIN_IMAGE}
