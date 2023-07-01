@@ -106,7 +106,7 @@ export const DisplayRunning: FC = () => {
             />
             </IconButton>
             <IconButton>
-
+              
             </IconButton>
             <Box>
             <div className="chartContainer">

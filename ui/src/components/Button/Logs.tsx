@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 // import React, { useState } from "react";
-import logs from '../../../public/favicon.png';
-
+import { IconButton } from '@mui/material'
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import { CommandButtonProps } from '../../types';
 
 interface LogCommandProp extends CommandButtonProps {}
@@ -45,12 +45,18 @@ const LogButton: React.FC<LogCommandProp> = ({ cmdRoute, fetchMethod }) => {
     document.addEventListener('mousedown', handler);
   });
 
+  const stopButtonStyle = {
+    color: 'black'
+  }
+
   return (
     <div>
-      <button
-        style={{ backgroundImage: `url(${logs})` }}
-        onClick={handleLog}
-      ></button>
+      <IconButton onClick={handleLog}>
+      <FormatListNumberedIcon
+          style={stopButtonStyle}
+        
+      />
+      </IconButton>
       {showList && (
         <div className="modal">
           <div className="modal-content" ref={closeRef}>
@@ -76,9 +82,13 @@ export const LogCommands: React.FC<LogCommandProp> = ({
   cmdRoute,
   fetchMethod,
 }) => {
+  const cmdbuttonStyle: React.CSSProperties = {
+    display: 'flex',
+    gap: '8px',
+  };
   return (
     <div className="startCommand-container">
-      <LogButton name={name} cmdRoute={cmdRoute} fetchMethod={fetchMethod} />
+      <LogButton style = {cmdbuttonStyle} name={name} cmdRoute={cmdRoute} fetchMethod={fetchMethod} />
     </div>
   );
 };

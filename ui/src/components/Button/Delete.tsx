@@ -32,7 +32,7 @@ const DeleteButton: React.FC<DeleteCommandProp> = ({ name, cmdRoute, fetchMethod
     }
   };
   const deleteButtonStyle = {
-    color: 'red',
+    color: 'black',
   };
   return (
     <IconButton onClick={command}>

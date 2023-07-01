@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import start from '../../../public/favicon.png';
-
 import { CommandButtonProps } from '../../types';
 import { UserContext } from '../../UserContext';
+import { IconButton } from '@mui/material'
+import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 
 interface StartCommandProp extends CommandButtonProps {
   onClick: () => void;
@@ -48,12 +49,17 @@ const StartButton: React.FC<StartCommandProp> = ({
     }
   };
 
+  
+  const stopButtonStyle = {
+    color: 'green'
+  }
+
   return (
-    <button
-      className="start"
-      style={{ backgroundImage: `url(${start})` }}
-      onClick={command}
-    ></button>
+    <IconButton onClick={command}>
+      <PlayArrowIcon
+        className="start"
+      />
+    </IconButton>
   );
 };
 
@@ -63,9 +69,15 @@ export const StartCommands: React.FC<StartCommandProp> = ({
   fetchMethod,
   onClick,
 }) => {
+  const cmdbuttonStyle: React.CSSProperties = {
+    display: 'flex',
+    gap: '8px',
+  };
+
   return (
     <div className="startCommand-container">
       <StartButton
+        style = {cmdbuttonStyle}
         name={name}
         cmdRoute={cmdRoute}
         fetchMethod={fetchMethod}
