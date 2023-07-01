@@ -16,8 +16,6 @@ export const MainNav: FC = () => {
     <Box className="main-nav">
       <Typography component="ul">
         {showing === 'Containers' ? <DockerContainers /> : <Images />}
-        Image Component
-        <Images />
       </Typography>
     </Box>
   );
