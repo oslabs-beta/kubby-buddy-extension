@@ -2,46 +2,41 @@ import React, { useContext } from 'react';
 import start from '../../../public/favicon.png';
 import { CommandButtonProps } from '../../types';
 import { UserContext } from '../../UserContext';
-import { IconButton } from '@mui/material'
-import PlayArrowIcon from '@mui/icons-material/PlayArrow'
+import { IconButton } from '@mui/material';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { createDockerDesktopClient } from '@docker/extension-api-client';
 
+const ddClient = createDockerDesktopClient();
 interface StartCommandProp extends CommandButtonProps {
   onClick: () => void;
 }
 
-const StartButton: React.FC<StartCommandProp> = ({
-  name,
-  cmdRoute,
-  fetchMethod,
-}) => {
-  const {
-    setStoppedContainers,
-    setRunningContainers,
-    stoppedContainers,
-    runningContainers,
-  } = useContext(UserContext);
+const StartButton: React.FC<StartCommandProp> = ({ name, cmdRoute, fetchMethod }) => {
+  const { setStoppedContainers, setRunningContainers, stoppedContainers, runningContainers } =
+    useContext(UserContext);
   //helper
   const command = async () => {
     try {
+      let data;
       const URL = cmdRoute;
-      const response = await fetch(URL, {
-        method: fetchMethod,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name: name }),
+      const response = ddClient.docker.cli.exec('start', [`${name}`]).then((result) => {
+        const parsed = result.parseJsonLines();
+        data = parsed;
       });
-      const data = await response.json();
-      console.log(data, '***data in handleStart ');
+      // const response = await fetch(URL, {
+      //   method: fetchMethod,
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ name: name }),
+      // });
+     
+     
 
-      const containerToStart = stoppedContainers.find(
-        (container) => container.Names === name
-      );
+      const containerToStart = stoppedContainers.find((container) => container.Names === name);
 
       if (containerToStart) {
-        setStoppedContainers(
-          stoppedContainers.filter((container) => container.Names !== name)
-        );
+        setStoppedContainers(stoppedContainers.filter((container) => container.Names !== name));
         setRunningContainers([...runningContainers, containerToStart]);
       }
     } catch (err) {
@@ -49,16 +44,13 @@ const StartButton: React.FC<StartCommandProp> = ({
     }
   };
 
-  
   const stopButtonStyle = {
     color: 'green'
-  }
+  };
 
   return (
     <IconButton onClick={command}>
-      <PlayArrowIcon
-        className="start"
-      />
+      <PlayArrowIcon className='start' />
     </IconButton>
   );
 };
@@ -67,17 +59,17 @@ export const StartCommands: React.FC<StartCommandProp> = ({
   name,
   cmdRoute,
   fetchMethod,
-  onClick,
+  onClick
 }) => {
   const cmdbuttonStyle: React.CSSProperties = {
     display: 'flex',
-    gap: '8px',
+    gap: '8px'
   };
 
   return (
-    <div className="startCommand-container">
+    <div className='startCommand-container'>
       <StartButton
-        style = {cmdbuttonStyle}
+        style={cmdbuttonStyle}
         name={name}
         cmdRoute={cmdRoute}
         fetchMethod={fetchMethod}
