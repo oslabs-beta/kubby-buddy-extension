@@ -97,7 +97,7 @@ export const SideNav: FC = () => {
         <li onClick={() => setShowing('Images')}>Images</li>
         <li onClick={() => setShowing('Containers')}>Containers</li>
       </ul>
-      <GlobalCommands />
+      {/* <GlobalCommands /> */}
       {/* <Quickview /> */}
     </div>
   );

@@ -15,7 +15,7 @@ export const MainNav: FC = () => {
   return (
     <Box className="main-nav">
       <Typography component="ul">
-        {/* {showing === 'Containers' ? <DockerContainers /> : <Images />} */}
+        {showing === 'Containers' ? <DockerContainers /> : <Images />}
         Image Component
         <Images />
       </Typography>
