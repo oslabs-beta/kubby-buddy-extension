@@ -27,9 +27,15 @@ const StopButton: React.FC<StopCommandProps> = ({
     try {
       let data
       const URL = cmdRoute;
+      console.log('stop button', name)
       const response = ddClient.docker.cli
         .exec('stop', [`${name}`])
-        .then((result) => (data = result.parseJsonLines()));
+        .then((result) => {
+          const parsed = result.parseJsonLines()
+          console.log('parsed', parsed)
+          data = parsed
+          console.log('data', data)
+        });
       // const response = await fetch(URL, {
       //   method: fetchMethod,
       //   headers: {
