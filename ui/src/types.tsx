@@ -64,6 +64,7 @@ export interface CommandButtonProps {
 	id?: string;
 	cmdRoute: URL;
 	fetchMethod: string;
+	style?: any
 }
 
 export interface GraphProps {
