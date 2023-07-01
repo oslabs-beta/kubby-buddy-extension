@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import stop from '../../../public/favicon.png';
 import { CommandButtonProps } from '../../types';
 import { UserContext } from '../../UserContext';
+import StopIcon from '@mui/icons-material/Stop'
+import { IconButton } from '@mui/material'
+
 // import { StoppedContainers } from '../Container/StoppedContainers';
 import { createDockerDesktopClient } from '@docker/extension-api-client';
 const ddClient = createDockerDesktopClient()
@@ -50,12 +53,18 @@ const StopButton: React.FC<StopCommandProps> = ({
       console.error(err);
     }
   };
+  const stopButtonStyle = {
+    color: 'red'
+  }
   return (
-    <button
-      className="stop"
-      style={{ backgroundImage: `url(${stop})` }}
-      onClick={command}
-    ></button>
+    <IconButton onClick={command}>
+      <StopIcon
+        className="stop"
+        style = {stopButtonStyle}
+       
+        
+      />
+    </IconButton>
   );
 };
 
@@ -64,9 +73,14 @@ export const StopCommands: React.FC<StopCommandProps> = ({
   cmdRoute,
   fetchMethod,
 }) => {
+
+  const cmdbuttonStyle: React.CSSProperties = {
+    display: 'flex',
+    gap: '8px',
+  };
   return (
     <div className="stopCommand-container">
-      <StopButton name={name} cmdRoute={cmdRoute} fetchMethod={fetchMethod} />
+      <StopButton style={cmdbuttonStyle}  name={name} cmdRoute={cmdRoute} fetchMethod={fetchMethod} />
     </div>
   );
 };

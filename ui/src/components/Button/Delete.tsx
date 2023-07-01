@@ -1,18 +1,14 @@
 // /prune-stopped-containers
 
 import React, { useContext } from 'react';
-import trash from '../../../public/favicon.png';
 import { UserContext } from '../../UserContext';
-
 import { CommandButtonProps } from '../../types';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { IconButton } from '@mui/material'
 
 interface DeleteCommandProp extends CommandButtonProps {}
 
-const DeleteButton: React.FC<DeleteCommandProp> = ({
-  name,
-  cmdRoute,
-  fetchMethod,
-}) => {
+const DeleteButton: React.FC<DeleteCommandProp> = ({ name, cmdRoute, fetchMethod }) => {
   //helper
   const { setStoppedContainers, stoppedContainers } = useContext(UserContext);
 
@@ -22,36 +18,34 @@ const DeleteButton: React.FC<DeleteCommandProp> = ({
       const response = await fetch(URL, {
         method: fetchMethod,
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name: name }),
+        body: JSON.stringify({ name: name })
       });
       const data = await response.json();
       console.log('test---->:' + data);
       if (response.status !== 500) {
-        setStoppedContainers(
-          stoppedContainers.filter((container) => container.Names !== name)
-        );
+        setStoppedContainers(stoppedContainers.filter((container) => container.Names !== name));
       }
     } catch (err) {
       console.error(err);
     }
   };
-
+  const deleteButtonStyle = {
+    color: 'black',
+  };
   return (
-    <button
-      style={{ backgroundImage: `url(${trash})` }}
-      onClick={command}
-    ></button>
+    <IconButton onClick={command}>
+      <DeleteIcon style={deleteButtonStyle} />
+    </IconButton>
   );
 };
 
-export const DeleteCommands: React.FC<DeleteCommandProp> = ({
-  name,
-  cmdRoute,
-  fetchMethod,
-}) => {
-  return (
-    <DeleteButton name={name} cmdRoute={cmdRoute} fetchMethod={fetchMethod} />
-  );
+export const DeleteCommands: React.FC<DeleteCommandProp> = ({ name, cmdRoute, fetchMethod }) => {
+
+  const cmdbuttonStyle: React.CSSProperties = {
+    display: 'flex',
+    gap: '8px',
+  };
+  return <DeleteButton style ={cmdbuttonStyle}  name={name} cmdRoute={cmdRoute} fetchMethod={fetchMethod} />;
 };

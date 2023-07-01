@@ -56,7 +56,7 @@ export const DockerContainers: FC = () => {
   return (
     <>
       <DisplayRunning />
-      <StoppedContainers />
+      {/* <StoppedContainers /> */}
     </>
   );
 };
