@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import stop from '../../../public/favicon.png';
-
 import { CommandButtonProps } from '../../types';
 import { UserContext } from '../../UserContext';
 // import { StoppedContainers } from '../Container/StoppedContainers';
-
+import { createDockerDesktopClient } from '@docker/extension-api-client';
+const ddClient = createDockerDesktopClient()
 interface StopCommandProps extends CommandButtonProps {
   // onClick: ()=> void;
 }
@@ -22,15 +22,19 @@ const StopButton: React.FC<StopCommandProps> = ({
   } = useContext(UserContext);
   const command = async () => {
     try {
+      let data
       const URL = cmdRoute;
-      const response = await fetch(URL, {
-        method: fetchMethod,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name: name }),
-      });
-      const data = await response.json();
+      const response = ddClient.docker.cli
+        .exec('stop', [`${name}`])
+        .then((result) => (data = result.parseJsonLines()));
+      // const response = await fetch(URL, {
+      //   method: fetchMethod,
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ name: name }),
+      // });
+      //  data = await response.json();
       console.log('----', data);
       console.log(cmdRoute, 'this is the route');
       console.log(runningContainers[0]);
