@@ -22,6 +22,9 @@ const DeleteImageButton: React.FC<DeleteCommandProp> = ({ id, cmdRoute, fetchMet
       const response = ddClient.docker.cli.exec('image', ['rmi', `${id}`]).then((result) => {
         console.log(result);
         data = result;
+        if (result) {
+          setAvailableImages(availableImages.filter((image) => image.ID !== id));
+          }
       });
       // const URL = cmdRoute;
       // const response = await fetch(URL, {
@@ -34,7 +37,7 @@ const DeleteImageButton: React.FC<DeleteCommandProp> = ({ id, cmdRoute, fetchMet
       // const data = await response.json();
       console.log('test---->:' + data);
       // if (data) {
-      setAvailableImages(availableImages.filter((image) => image.ID !== id));
+      // setAvailableImages(availableImages.filter((image) => image.ID !== id));
       // }
     } catch (err) {
       console.error(err);
