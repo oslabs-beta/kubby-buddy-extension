@@ -34,7 +34,7 @@ export function App() {
 					<MainNav />
 				</div>
 				
-				<Stack direction="row" alignItems="start" spacing={2} sx={{ mt: 4 }}>
+				{/* <Stack direction="row" alignItems="start" spacing={2} sx={{ mt: 4 }}>
 					<Button variant="contained" onClick={fetchAndDisplayResponse}>
 						Call backend
           </Button>
@@ -49,7 +49,7 @@ export function App() {
 						minRows={5}
 						value={response ?? ""}
 					/>
-				</Stack>
+				</Stack> */}
 			</>
 		</UserProvider>
 	);
