@@ -30,8 +30,6 @@ const StartButton: React.FC<StartCommandProp> = ({ name, cmdRoute, fetchMethod }
       //   },
       //   body: JSON.stringify({ name: name }),
       // });
-     
-     
 
       const containerToStart = stoppedContainers.find((container) => container.Names === name);
 
@@ -50,7 +48,7 @@ const StartButton: React.FC<StartCommandProp> = ({ name, cmdRoute, fetchMethod }
 
   return (
     <IconButton onClick={command}>
-      <PlayArrowIcon className='start' />
+      <PlayArrowIcon style={stopButtonStyle} className='start' />
     </IconButton>
   );
 };
