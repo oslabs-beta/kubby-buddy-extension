@@ -46,6 +46,8 @@ export const DisplayRunning: FC = () => {
 
   const cmdbuttonStyle = {
     display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     gap: '8px'
   };
 
@@ -75,29 +77,19 @@ export const DisplayRunning: FC = () => {
         <Box style={imageSubinfoStyle} className='image-subinfo'></Box>
       </Box>
       <Box style={cmdbuttonStyle} className='cmdbutton'>
-        <IconButton style={deleteButtonStyle} className='delete-button'>
-          <StopCommands
-            name={el.Names}
-            cmdRoute={new URL('/container/stop', window.location.href)}
-            fetchMethod='post'
-          />
-        </IconButton>
-        {/* <IconButton style={deleteButtonStyle} className='delete-button'>
-            <DeleteCommands
-              name={el.Names}
-              cmdRoute={new URL('/container/remove-specific-container', window.location.href)}
-              fetchMethod='delete'
-            />
-          </IconButton> */}
-        <IconButton>
-          <LogCommands
-            name={el.Names}
-            cmdRoute={new URL(`/container/log?name=${el.Names}`, window.location.href)}
-            fetchMethod='get'
-          />
-        </IconButton>
-        <IconButton></IconButton>
-        <Box style={imageInfoStyle} >
+        <StopCommands
+          name={el.Names}
+          cmdRoute={new URL('/container/stop', window.location.href)}
+          fetchMethod='post'
+        />
+
+        <LogCommands
+          name={el.Names}
+          cmdRoute={new URL(`/container/log?name=${el.Names}`, window.location.href)}
+          fetchMethod='get'
+        />
+
+        <Box style={imageInfoStyle}>
           {statStream.length > 0 ? (
             <Donut2
               shouldUpdate={statStream[index]}
@@ -108,7 +100,7 @@ export const DisplayRunning: FC = () => {
             ''
           )}
         </Box>
-        <Box style={imageInfoStyle} >
+        <Box style={imageInfoStyle}>
           {statStream.length > 0 ? (
             <Donut1
               shouldUpdate={statStream[index]}

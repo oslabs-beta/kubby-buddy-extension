@@ -38,7 +38,9 @@ export const StoppedContainers: FC = () => {
 
   const cmdbuttonStyle = {
     display: 'flex',
-    gap: '8px',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '8px'
   };
 
   const imageSubinfoStyle = {
@@ -70,28 +72,28 @@ export const StoppedContainers: FC = () => {
             <Box style={imageSubinfoStyle} className='image-subinfo'></Box>
           </Box>
           <Box style={cmdbuttonStyle} className='cmdbutton'>
-            <IconButton style = {deleteButtonStyle} >
+            {/* <IconButton style = {deleteButtonStyle} > */}
               <StartCommands
                 name={el.Names}
                 cmdRoute={new URL('/container/start', window.location.href)}
                 fetchMethod='post'
                 onClick={handleStopInvoke}
               />
-            </IconButton>
-            <IconButton style = {deleteButtonStyle} >
+            {/* </IconButton> */}
+            {/* <IconButton style = {deleteButtonStyle} > */}
               <DeleteCommands
                 name={el.Names}
                 cmdRoute={new URL('/container/remove-specific-container', window.location.href)}
                 fetchMethod='delete'
               />
-            </IconButton>
-            <IconButton style = {deleteButtonStyle} >
+            {/* </IconButton> */}
+            {/* <IconButton style = {deleteButtonStyle} > */}
               <LogCommands
                 name={el.Names}
                 cmdRoute={new URL(`/container/log?name=${el.Names}`, window.location.href)}
                 fetchMethod='get'
               />
-            </IconButton>
+            {/* </IconButton> */}
           </Box>
         </ListItem>
       );
