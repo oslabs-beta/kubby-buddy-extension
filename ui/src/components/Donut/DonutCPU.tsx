@@ -55,7 +55,10 @@ export default function Donut1(props: any) {
                 position: 'bottom'
               }
             },
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            animation: {
+              duration: 0
+            }
           }}
         />
       </div>

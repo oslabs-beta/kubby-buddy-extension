@@ -1,8 +1,10 @@
-import * as React from 'react';
-const { useEffect, useState } = React;
+import React, {useContext, useEffect, useState} from 'react';
+// const { useEffect, useState } = React;
 import { Typography } from '@mui/material'
 import { Doughnut } from 'react-chartjs-2';
 import { Chart, ArcElement } from 'chart.js';
+import { UserContext } from '../../UserContext';
+
 Chart.register(ArcElement);
 
 export default function Donut2(props: any) {
@@ -11,6 +13,8 @@ export default function Donut2(props: any) {
   if (!data || !data.MemPerc) {
     return null;
   }
+
+  
 
   const [chartData, setChartData] = useState<any>({
     labels: ['Usage', 'Free Space'],
@@ -56,7 +60,10 @@ export default function Donut2(props: any) {
                 position: 'bottom'
               }
             },
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            animation: {
+              duration: 0
+            }
           }}
         />
       </div>
