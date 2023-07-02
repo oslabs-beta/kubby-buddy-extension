@@ -3,22 +3,31 @@ import React, { useEffect, useState, useRef } from 'react';
 import { IconButton } from '@mui/material'
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import { CommandButtonProps } from '../../types';
+import { createDockerDesktopClient } from '@docker/extension-api-client'
+
+const ddClient = createDockerDesktopClient()
 
 interface LogCommandProp extends CommandButtonProps {}
 
-const LogButton: React.FC<LogCommandProp> = ({ cmdRoute, fetchMethod }) => {
+const LogButton: React.FC<LogCommandProp> = ({ name, cmdRoute, fetchMethod }) => {
   const [data, setData] = useState([]);
   const [showList, setShowList] = useState(false);
   const handleLog = async () => {
     const URL = cmdRoute;
-    const response = await fetch(URL, {
-      method: fetchMethod,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const data = await response.json();
-    console.log(data);
+    
+    const response = ddClient.docker.cli
+      .exec('container', ['logs', `${name}`])
+      .then(result => {
+        const parsed: any = result.stdout.split('\n')
+        setData(parsed)
+      })
+    // const response = await fetch(URL, {
+    //   method: fetchMethod,
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // });
+    // const data = await response.json();
     setData(data);
     setData(data.reverse());
     setShowList(true);
