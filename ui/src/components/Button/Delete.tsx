@@ -18,9 +18,12 @@ const DeleteButton: React.FC<DeleteCommandProp> = ({ name, cmdRoute, fetchMethod
       ddClient.docker.cli.exec('rm', [`${name}`]).then((result) => {
         console.log('result', result);
         console.log('stdout', result.stdout);
+        if (result) {
+          setStoppedContainers(stoppedContainers.filter((container) => container.Names !== name));
+        }
       });
 
-      setStoppedContainers(stoppedContainers.filter((container) => container.Names !== name));
+     
     } catch (err) {
       console.error(err);
     }
