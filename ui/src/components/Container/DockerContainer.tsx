@@ -25,17 +25,26 @@ export const DockerContainers: FC = () => {
   useEffect(() => {
     async function getRunningContainers() {
       try {
-        const url = 'container/all-active-containers';
-        const response = await fetch(url);
-        const data: Container[] = await response.json();
-        setRunningContainers(
-          data.filter((container) => container.State !== 'exited')
-        );
-        setStoppedContainers(
-          data.filter((container) => container.State === 'exited')
-        );
-      } catch (err) {
-        console.error(err);
+        let data: any;
+        const containers = await ddClient.docker.listContainers();
+        console.log(containers, typeof containers)
+        await ddClient.docker.cli
+          .exec('ps', ['--all', '--format', '"{{json .}}"'])
+          .then((result) => (data = result.parseJsonLines()));
+
+        //     await promisifyExec(
+        // 	"docker ps -a --format '{{json .}}'"
+        // );
+        // const getURL = 'container/all-active-containers';
+        // const fetchResponse = await fetch(getURL);
+        // const data: Container[] = await fetchResponse.json();
+
+        console.log(data);
+
+        setRunningContainers(data?.filter((container: any) => container.State !== 'exited'));
+        setStoppedContainers(data?.filter((container: any) => container.State === 'exited'));
+      } catch (error) {
+        console.log(error);
       }
     }
     getRunningContainers();
