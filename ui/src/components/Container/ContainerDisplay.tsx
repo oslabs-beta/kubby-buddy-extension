@@ -97,19 +97,30 @@ export const DisplayRunning: FC = () => {
             </IconButton>
             <IconButton></IconButton>
             <Box>
-              <div className='chartContainer'>
-                {statStream.length > 0 ? (
-                  <Donut1 className='bargraph' data={statStream[index]} />
+              <Donut1 className='bargraph' data={98} />
+            </Box>
+            <Box>
+              {statStream.length > 0 ? (
+                <Donut2 className='bargraph' data={statStream[index]} />
+              ) : (
+                ''
+              )}
+            </Box>
+            <Box>
+              {statStream.length > 0 ?
+                <Donut1 className='bargraph' data = { statStream[index]} />
+                : ''}
+            </Box>
+
+            {/* <div className='chartContainer'>
+                {statStream.length < 0 ? (
+                  <Donut1 className='bargraph' data={98} />
                 ) : (
                   ''
                 )}
               </div>
               <div className='chartContainer'>
-                {statStream.length > 0 ? (
-                  <Donut2 className='bargraph' data={statStream[index]} />
-                ) : (
-                  ''
-                )}
+                
               </div>
               <div className='chartContainer'>
                 {statStream.length > 0
@@ -120,8 +131,7 @@ export const DisplayRunning: FC = () => {
                     //   />
                     ''
                   : ''}
-              </div>
-            </Box>
+              </div> */}
           </Box>
         </ListItem>
       );

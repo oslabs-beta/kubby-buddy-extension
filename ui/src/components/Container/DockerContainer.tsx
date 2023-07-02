@@ -2,11 +2,25 @@ import React, { FC, useContext, useEffect } from 'react';
 import { UserContext } from '../../UserContext';
 import { DisplayRunning } from './ContainerDisplay';
 import { StoppedContainers } from './StoppedContainers';
+import { createDockerDesktopClient } from '@docker/extension-api-client';
 import { Container } from '../../types';
+import { parse } from 'path';
+const ddClient = createDockerDesktopClient();
+
+const parseData = (stdout: string) => {
+  const containers = [];
+  const dockerStats: string = stdout.trim();
+  const conts: string[] = dockerStats.split('\n');
+
+  for (let i = 0; i < conts.length; i++) {
+    containers.push(JSON.parse(conts[i]));
+  }
+  //returns array of proper objects to then be stringified
+  return containers;
+};
 
 export const DockerContainers: FC = () => {
-  const { setStoppedContainers, setRunningContainers, setStatStream } =
-    useContext(UserContext);
+  const { setStoppedContainers, setRunningContainers, setStatStream } = useContext(UserContext);
 
   // useEffect(() => {
   //   async function getRunningContainers() {
@@ -29,28 +43,26 @@ export const DockerContainers: FC = () => {
 
   //Create EvenSource to stream docker stats
 
-  // useEffect(() => {
-  //   // ** Change localhost to env later on **
-  //   const sse = new EventSource('http://localhost:8080/general/stats');
-  //   // console.log(sse);
-  //   sse.onmessage = async (event: MessageEvent) => {
-  //     const data = JSON.parse(event?.data);
-  //     // const data = await event?.data.json()
-  //     setStatStream(data);
-  //   };
-    //If there is an error for the stream (Docker not running / No active containers) - setup for Error Component
+  // useEffect(
+  //   () => {
+  //     // ** Change localhost to env later on **
+  //     const response = ddClient.docker.cli
+  //       .exec('stats', ['--no-stream', '--format', '-json'])
+  //       .then((result: any) => {
+    
+  //         if (typeof result === 'object') {
+  //           setStatStream(result);
+  //           console.log(result)
+  //         }
+          
+  //       });
+  //   },
+  //   // If there is an error for the stream (Docker not running / No active containers) - setup for Error Component
 
-    //if this is uncommented, the stream stops
+  //   // if this is uncommented, the stream stops
 
-  //   sse.onerror = (event) => {
-  //     // return sse.close();
-  //     console.log('ERROR TRIPPED', event);
-  //   };
-  //   //Cleanup
-  //   return () => {
-  //     sse.close();
-  //   };
-  // }, []);
+  //   []
+  // );
 
   //pass down necessary props to buttons for their relevant fetch requests
   return (

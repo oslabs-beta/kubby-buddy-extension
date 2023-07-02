@@ -33,7 +33,8 @@ export const SideNav: FC = () => {
     setRunningContainers,
     setAvailableImages,
     setShowing,
-    setAvailableVolumes
+    setAvailableVolumes,
+    setStatStream
   } = useContext(UserContext);
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -111,9 +112,27 @@ export const SideNav: FC = () => {
         console.log(error);
       }
     }
+
+    async function getStats() {
+      try {
+        let data: any;
+        await ddClient.docker.cli
+        .exec('stats', ['--no-stream', '--format', '"{{json .}}"'])
+          .then((result) => (data = result.parseJsonLines()));
+        // const getURL = 'volume/all-volumes';
+        // const fetchResponse = await fetch(getURL);
+        // const data = await fetchResponse.json();
+        console.log('async getStats', data)
+        setStatStream(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
     getAvailableVolumes();
     getRunningContainers();
     getAvailableImages();
+    getStats()
   }, []);
 
   return (

@@ -1,8 +1,12 @@
 import * as React from 'react';
 const { useEffect, useState } = React;
+import { Typography } from '@mui/material'
 import { Doughnut } from 'react-chartjs-2';
+import { Chart, ArcElement } from 'chart.js';
+Chart.register(ArcElement);
 
 export default function Donut2(props: any) {
+  console.log('donut2', props.data, props.data.MemPerc)
   let { data } = props;
   if (!data || !data.MemPerc) {
     return null;
@@ -14,9 +18,9 @@ export default function Donut2(props: any) {
       {
         label: 'Container Use Ratio',
         data: [0, 0],
-        backgroundColor: ['rgb(255, 99, 500)', 'rgb(54, 162, 235)'],
-      },
-    ],
+        backgroundColor: ['rgb(255, 99, 500)', 'rgb(54, 162, 235)']
+      }
+    ]
   });
 
   useEffect(() => {
@@ -27,17 +31,21 @@ export default function Donut2(props: any) {
         {
           label: 'Container Use Ratio',
           data: [newData, 100 - newData],
-          backgroundColor: ['rgb(1, 131, 254)', 'rgb(254,124,1)'],
-        },
-      ],
+          backgroundColor: ['rgb(1, 131, 254)', 'rgb(254,124,1)']
+        }
+      ]
     });
   }, [data.MemPerc]);
 
   return (
     <>
-      <h1 className="header-linegraph">
-        Memory Usage: {JSON.stringify(data.MemPerc).replace(/"/g, '')}
-      </h1>
+      <Typography>
+        {/* Mem Usage: 1.9% */}
+        Mem Usage: {JSON.stringify(data.MemPerc).replace(/"/g, '')}
+
+      </Typography>
+     
+
       <div>
         <Doughnut
           data={chartData}
@@ -45,10 +53,10 @@ export default function Donut2(props: any) {
             plugins: {
               legend: {
                 display: true,
-                position: 'bottom',
-              },
+                position: 'bottom'
+              }
             },
-            maintainAspectRatio: false,
+            maintainAspectRatio: false
           }}
         />
       </div>
