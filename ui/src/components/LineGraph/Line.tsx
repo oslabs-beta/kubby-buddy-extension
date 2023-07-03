@@ -104,7 +104,7 @@ export default function LineChart(props: any) {
     <>
       <Typography>Network I/O: {JSON.stringify(props.data.NetIO).replace(/"/g, '')}</Typography>
 
-      <div className='lineGraph' style={{ maxWidth: '50%', maxHeight: '300px' }}>
+      <div className='lineGraph' style={{ maxWidth: '100%'}}>
         <Line
           ref={chart}
           data={chartData}

@@ -137,6 +137,17 @@ export const DisplayRunning: FC = () => {
               ''
             )}
           </Box>
+          <Box style={imageInfoStyle}>
+            {statStream.length > 0 ? (
+              <LineChart
+                shouldUpdate={statStream[index]}
+                className='bargraph'
+                data={statStream[index]}
+              />
+            ) : (
+              ''
+            )}
+          </Box>
         </Box>
         <IconButton aria-label='expand row' size='small' onClick={() => handleOpen(index)}>
           {open === index ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}

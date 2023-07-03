@@ -1,20 +1,13 @@
 //@ts-ignore
-import React, { FC, useContext, useState } from 'react';
-import { UserContext } from '../../UserContext';
+import React, { FC } from 'react';
 import {
-  IconButton,
   Collapse,
-  // Container,
-  // CardContent,
+
   Box,
   Typography
 } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import LineChart from '../LineGraph/Line';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import { GraphProps } from '../../types';
 
@@ -30,14 +23,11 @@ const bull = (
   </Box>
 );
 export const Collapsable: FC<CollapsableProps> = (props) => {
-  // const [open, setOpen] = useState(false)
   const { open, id, statStream } = props;
 
   return (
     <>
-      {/* <IconButton aria-label='expand row' size='small' onClick={() => setOpen(!open)}>
-          {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-        </IconButton> */}
+  
       <Collapse
         in={open === id}
         timeout='auto'
@@ -194,8 +184,7 @@ export const Collapsable: FC<CollapsableProps> = (props) => {
                 display: 'flex',
                 flexDirection: 'column',
                 paddingBottom: '1em'
-                // alignItems: 'space-between',
-                // justifyContent: 'space-between'
+    
               }}
             >
               <CardContent sx={{ height: '100%' }}>
@@ -226,8 +215,7 @@ export const Collapsable: FC<CollapsableProps> = (props) => {
                 display: 'flex',
                 flexDirection: 'column',
                 paddingBottom: '1em'
-                // alignItems: 'space-between',
-                // justifyContent: 'space-between'
+          
               }}
             >
               <CardContent sx={{ height: '100%' }}>
@@ -258,8 +246,7 @@ export const Collapsable: FC<CollapsableProps> = (props) => {
                 display: 'flex',
                 flexDirection: 'column',
                 paddingBottom: '1em'
-                // alignItems: 'space-between',
-                // justifyContent: 'space-between'
+        
               }}
             >
               <CardContent sx={{ height: '100%' }}>
@@ -290,8 +277,7 @@ export const Collapsable: FC<CollapsableProps> = (props) => {
                 display: 'flex',
                 flexDirection: 'column',
                 paddingBottom: '1em'
-                // alignItems: 'space-between',
-                // justifyContent: 'space-between'
+   
               }}
             >
               <CardContent sx={{ height: '100%' }}>
