@@ -103,7 +103,7 @@ export const DisplayRunning: FC = () => {
           <Box style={imageSubinfoStyle} className='image-subinfo'></Box>
         </Box>
         <Box style={cmdbuttonStyle} className='cmdbutton'>
-          <StopCommands
+          {/* <StopCommands
             name={el.Names}
             cmdRoute={new URL('/container/stop', window.location.href)}
             fetchMethod='post'
@@ -113,7 +113,7 @@ export const DisplayRunning: FC = () => {
             name={el.Names}
             cmdRoute={new URL(`/container/log?name=${el.Names}`, window.location.href)}
             fetchMethod='get'
-          />
+          /> */}
 
           <Box style={imageInfoStyle}>
             {statStream.length > 0 ? (
@@ -147,8 +147,21 @@ export const DisplayRunning: FC = () => {
             ) : (
               ''
             )}
+            
           </Box>
+          <StopCommands
+            name={el.Names}
+            cmdRoute={new URL('/container/stop', window.location.href)}
+            fetchMethod='post'
+          />
+
+          <LogCommands
+            name={el.Names}
+            cmdRoute={new URL(`/container/log?name=${el.Names}`, window.location.href)}
+            fetchMethod='get'
+          />
         </Box>
+        
         <IconButton aria-label='expand row' size='small' onClick={() => handleOpen(index)}>
           {open === index ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </IconButton>
