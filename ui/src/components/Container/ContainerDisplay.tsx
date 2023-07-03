@@ -143,7 +143,7 @@ export const DisplayRunning: FC = () => {
         </IconButton>
       </ListItem>
       <ListItem>
-        <Collapsable id={index} open={open} statStream={statStream} />
+        <Collapsable id={index} open={open} statStream={statStream}/>
       </ListItem>
     </div>
   ));
