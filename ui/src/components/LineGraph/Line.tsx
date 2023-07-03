@@ -6,6 +6,7 @@ import { Line } from 'react-chartjs-2';
 import ChartStreaming from 'chartjs-plugin-streaming';
 Chart.overrides.line.spanGaps = true;
 Chart.register(ChartStreaming);
+import { Typography } from '@mui/material';
 
 export default function LineChart(props: any) {
   const { data, change } = props;
@@ -20,22 +21,22 @@ export default function LineChart(props: any) {
         label: 'Network Input',
         data: [],
         backgroundColor: 'rgba(38, 189, 106, 0.75)',
-        spanGaps: true,
+        spanGaps: true
       },
       {
         label: 'Network Output',
         data: [],
         backgroundColor: 'rgba(221, 80, 105, 0.75)',
-        spanGaps: true,
-      },
-    ],
+        spanGaps: true
+      }
+    ]
   });
 
   useEffect(() => {
     const newData = {
       value1: dataSplit(data.NetIO)[0],
       value2: dataSplit(data.NetIO)[1],
-      timestamp: new Date(),
+      timestamp: new Date()
     };
     setData(newData);
   }, [change]);
@@ -46,36 +47,32 @@ export default function LineChart(props: any) {
         ...prevState.datasets[0].data,
         {
           x: Number(dataObj.timestamp),
-          y: dataObj.value1,
-        },
+          y: dataObj.value1
+        }
       ];
       const updatedData2 = [
         ...prevState.datasets[1].data,
         {
           x: Number(dataObj.timestamp),
-          y: dataObj.value2,
-        },
+          y: dataObj.value2
+        }
       ];
-      const updatedBackgroundColors1 = Array(updatedData1.length).fill(
-        'rgb(254, 125, 1)'
-      );
-      const updatedBackgroundColors2 = Array(updatedData2.length).fill(
-        'rgb(155, 76, 0)'
-      );
+      const updatedBackgroundColors1 = Array(updatedData1.length).fill('rgb(254, 125, 1)');
+      const updatedBackgroundColors2 = Array(updatedData2.length).fill('rgb(155, 76, 0)');
       return {
         ...prevState,
         datasets: [
           {
             ...prevState.datasets[0],
             data: updatedData1,
-            backgroundColor: updatedBackgroundColors1,
+            backgroundColor: updatedBackgroundColors1
           },
           {
             ...prevState.datasets[1],
             data: updatedData2,
-            backgroundColor: updatedBackgroundColors2,
-          },
-        ],
+            backgroundColor: updatedBackgroundColors2
+          }
+        ]
       };
     });
 
@@ -105,10 +102,9 @@ export default function LineChart(props: any) {
 
   return (
     <>
-      <h1 className="header-linegraph">
-        Network I/O: {JSON.stringify(props.data.NetIO).replace(/"/g, '')}
-      </h1>
-      <div className="lineGraph">
+      <Typography>Network I/O: {JSON.stringify(props.data.NetIO).replace(/"/g, '')}</Typography>
+
+      <div className='lineGraph' style={{ maxWidth: '50%', maxHeight: '300px' }}>
         <Line
           ref={chart}
           data={chartData}
@@ -116,14 +112,14 @@ export default function LineChart(props: any) {
             plugins: {
               legend: {
                 display: true,
-                position: 'bottom',
+                position: 'bottom'
               },
               streaming: {
                 duration: 20000,
                 refresh: 100,
                 delay: 1000,
-                frameRate: 100,
-              },
+                frameRate: 100
+              }
             },
             scales: {
               x: {
@@ -131,15 +127,15 @@ export default function LineChart(props: any) {
                 realtime: {
                   duration: 20000,
                   refresh: 100,
-                  delay: 1000,
-                },
-              },
+                  delay: 1000
+                }
+              }
             },
             elements: {
               line: {
-                spanGaps: true,
-              },
-            },
+                spanGaps: true
+              }
+            }
           }}
         />
       </div>

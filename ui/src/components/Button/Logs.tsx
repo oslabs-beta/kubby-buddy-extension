@@ -88,7 +88,7 @@ const LogButton: React.FC<LogCommandProp> = ({ name, cmdRoute, fetchMethod }) =>
           right: '15%',
           top: 0,
           bottom: 0,
-          position: 'fixed',
+          // position: 'fixed',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center'
