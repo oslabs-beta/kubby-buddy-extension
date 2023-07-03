@@ -15,7 +15,7 @@ import {
   Collapse,
   Card,
   Container,
-  CardContent,
+  CardContent
 } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -42,8 +42,8 @@ export const DisplayRunning: FC = () => {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '16px',
-    borderBottom: '1px solid #e0e0e0'
+    padding: '16px'
+    // borderBottom: open === index ? '' : '1px solid #e0e0e0'
   };
 
   const imageInfoStyle = {
@@ -85,7 +85,11 @@ export const DisplayRunning: FC = () => {
   };
   let running = runningContainers.map((el, index) => (
     <div>
-      <ListItem style={listItemStyle} key={index}>
+      <ListItem
+        style={listItemStyle}
+        sx={{ borderBottom: open === index ? '' : '1px solid #e0e0e0' }}
+        key={index}
+      >
         <Box>
           <Typography variant='h6' style={imageTitleStyle} className='image-Title'>
             {el.Names}
@@ -138,7 +142,7 @@ export const DisplayRunning: FC = () => {
           {open === index ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </IconButton>
       </ListItem>
-      <ListItem >
+      <ListItem>
         <Collapsable id={index} open={open} statStream={statStream} />
       </ListItem>
     </div>
