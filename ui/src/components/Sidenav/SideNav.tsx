@@ -117,21 +117,21 @@ export const SideNav: FC = () => {
 
     async function getStats() {
 
-        try {
-          let data: any;
-          await ddClient.docker.cli
+      try {
+        let data: any;
+        await ddClient.docker.cli
           .exec('stats', ['--no-stream', '--format', '"{{json .}}"'])
-            .then((result) => (data = result.parseJsonLines()));
-          // const getURL = 'volume/all-volumes';
-          // const fetchResponse = await fetch(getURL);
-          // const data = await fetchResponse.json();
-          // console.log('async getStats', data)
-          setStatStream(data);
-        } catch (error) {
-          // console.log(error);
-        }
-        
-      
+          .then((result) => (data = result.parseJsonLines()));
+        // const getURL = 'volume/all-volumes';
+        // const fetchResponse = await fetch(getURL);
+        // const data = await fetchResponse.json();
+        // console.log('async getStats', data)
+        setStatStream(data);
+      } catch (error) {
+        // console.log(error);
+      }
+
+
     }
 
     //
@@ -140,14 +140,14 @@ export const SideNav: FC = () => {
       // getRunningContainers();
       // getAvailableImages();
       getStats()
-      }, 1000)
+    }, 5000)
 
-   
+
     getAvailableVolumes();
     getRunningContainers();
     getAvailableImages();
     getStats()
-    
+
   }, []);
 
   return (

@@ -9,7 +9,7 @@ Chart.register(ChartStreaming);
 import { Typography } from '@mui/material';
 
 export default function LineChart(props: any) {
-  const { data, change } = props;
+  const { data, shouldUpdate } = props;
   if (!data || !data.NetIO) {
     return null;
   }
@@ -39,7 +39,7 @@ export default function LineChart(props: any) {
       timestamp: new Date()
     };
     setData(newData);
-  }, [change]);
+  }, [shouldUpdate]);
 
   function setData(dataObj: any) {
     setChartData((prevState: any) => {
@@ -104,7 +104,7 @@ export default function LineChart(props: any) {
     <>
       <Typography>Network I/O: {JSON.stringify(props.data.NetIO).replace(/"/g, '')}</Typography>
 
-      <div className='lineGraph' style={{ maxWidth: '100%'}}>
+      <div className='lineGraph' style={{ maxWidth: '100%' }}>
         <Line
           ref={chart}
           data={chartData}
@@ -116,7 +116,7 @@ export default function LineChart(props: any) {
               },
               streaming: {
                 duration: 20000,
-                refresh: 100,
+                refresh: 5000,
                 delay: 1000,
                 frameRate: 100
               }
@@ -126,7 +126,7 @@ export default function LineChart(props: any) {
                 type: 'realtime',
                 realtime: {
                   duration: 20000,
-                  refresh: 100,
+                  refresh: 5000,
                   delay: 1000
                 }
               }
