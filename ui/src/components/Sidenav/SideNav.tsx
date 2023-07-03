@@ -61,7 +61,7 @@ export const SideNav: FC = () => {
       try {
         let data: any;
         const containers = await ddClient.docker.listContainers();
-        console.log(containers, typeof containers)
+        // console.log(containers, typeof containers)
         await ddClient.docker.cli
           .exec('ps', ['--all', '--format', '"{{json .}}"'])
           .then((result) => (data = result.parseJsonLines()));
@@ -73,12 +73,12 @@ export const SideNav: FC = () => {
         // const fetchResponse = await fetch(getURL);
         // const data: Container[] = await fetchResponse.json();
 
-        console.log(data);
+        // console.log(data);
 
         setRunningContainers(data?.filter((container: any) => container.State !== 'exited'));
         setStoppedContainers(data?.filter((container: any) => container.State === 'exited'));
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
     async function getAvailableImages() {
@@ -90,13 +90,13 @@ export const SideNav: FC = () => {
         // const getURL = 'image/all-images';
         // const fetchResponse = await fetch(getURL);
         // const data = await fetchResponse.json();
-        console.log(data);
+        // console.log(data);
         setAvailableImages(data);
       } catch (error) {
         setAvailableImages([]);
 
-        console.log(error);
-        console.log('hi');
+        // console.log(error);
+        // console.log('hi');
       }
     }
     async function getAvailableVolumes() {
@@ -111,7 +111,7 @@ export const SideNav: FC = () => {
 
         setAvailableVolumes(data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
 
@@ -125,10 +125,10 @@ export const SideNav: FC = () => {
           // const getURL = 'volume/all-volumes';
           // const fetchResponse = await fetch(getURL);
           // const data = await fetchResponse.json();
-          console.log('async getStats', data)
+          // console.log('async getStats', data)
           setStatStream(data);
         } catch (error) {
-          console.log(error);
+          // console.log(error);
         }
         
       

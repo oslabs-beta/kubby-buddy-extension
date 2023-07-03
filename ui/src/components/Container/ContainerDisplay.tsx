@@ -35,7 +35,7 @@ export const DisplayRunning: FC = () => {
   useEffect(() => {
     // Call the updateChange function whenever statStream is updated
     updateChange();
-    console.log(runningContainers);
+    // console.log(runningContainers);
   }, [runningContainers, statStream]);
 
   const listItemStyle = {
@@ -84,7 +84,7 @@ export const DisplayRunning: FC = () => {
     }
   };
   let running = runningContainers.map((el, index) => (
-    <div>
+    <div key = {index}>
       <ListItem
         style={listItemStyle}
         sx={{ borderBottom: open === index ? '' : '1px solid #e0e0e0' }}

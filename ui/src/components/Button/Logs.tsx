@@ -13,6 +13,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import { CommandButtonProps } from '../../types';
 import { createDockerDesktopClient } from '@docker/extension-api-client';
+import SubjectIcon from '@mui/icons-material/Subject';
+
 
 const ddClient = createDockerDesktopClient();
 
@@ -48,7 +50,14 @@ const LogButton: React.FC<LogCommandProp> = ({ name, cmdRoute, fetchMethod }) =>
       .replace(/[{}"]/g, '')
       .replace(/:/g, ': ')
       .replace(/,/g, ', ');
-    return cleanedLog;
+    
+    const ind = cleanedLog.indexOf('msg')
+    const firstHalf = cleanedLog.slice(ind + 7)
+    console.log(firstHalf)
+    const ind2 = firstHalf.indexOf('\\')
+    const result = firstHalf.slice(0, ind2)
+    // console.log('result', result)
+    return result;
   }
 
   const closeRef = useRef<HTMLDivElement>(null);
@@ -139,7 +148,7 @@ const LogButton: React.FC<LogCommandProp> = ({ name, cmdRoute, fetchMethod }) =>
               {data.map((row, index) => (
                 <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                   <TableCell component='th' scope='row'>
-                    {cleanLogData(row)}
+                    <b>{index + 1}.</b> {cleanLogData(row)}
                   </TableCell>
                 </TableRow>
               ))}
