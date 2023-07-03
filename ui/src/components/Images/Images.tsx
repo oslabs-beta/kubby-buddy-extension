@@ -38,6 +38,8 @@ export const Images: FC = () => {
 
   const cmdbuttonStyle = {
     display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     gap: '8px'
   };
 
@@ -74,12 +76,12 @@ export const Images: FC = () => {
           </Box>
         </Box>
         <Box style={cmdbuttonStyle} className='cmdbutton'>
-          <IconButton style={deleteButtonStyle} className='delete-button'>
+          {/* <IconButton style={deleteButtonStyle} className='delete-button'> */}
             <DeleteImageCommands id={el.ID} cmdRoute={new URL('/container/remove-specific-container', window.location.href)} fetchMethod='delete' />
-          </IconButton>
-          <IconButton style={playButtonStyle} className='play-button'>
+          {/* </IconButton> */}
+          {/* <IconButton style={playButtonStyle} className='play-button'> */}
             <PlayArrowIcon />
-          </IconButton>
+          {/* </IconButton> */}
         </Box>
       </ListItem>
     );

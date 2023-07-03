@@ -1,5 +1,5 @@
 import * as React from 'react';
-import favicon from '../../../public/favicon.png';
+import favicon from '../../public/favicon.png';
 
 export default function Loader() {
   return (

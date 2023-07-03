@@ -63,7 +63,7 @@ const StopButton: React.FC<StopCommandProps> = ({
     color: 'red'
   }
   return (
-    <IconButton onClick={command}>
+    <IconButton onClick={command} sx={{ "&:hover": { color: "white" } }}>
       <StopIcon
         className="stop"
         style = {stopButtonStyle}
@@ -82,7 +82,9 @@ export const StopCommands: React.FC<StopCommandProps> = ({
 
   const cmdbuttonStyle: React.CSSProperties = {
     display: 'flex',
-    gap: '8px',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '8px'
   };
   return (
     <div className="stopCommand-container">

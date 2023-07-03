@@ -27,7 +27,6 @@ export const DockerContainers: FC = () => {
       try {
         let data: any;
         const containers = await ddClient.docker.listContainers();
-        console.log(containers, typeof containers)
         await ddClient.docker.cli
           .exec('ps', ['--all', '--format', '"{{json .}}"'])
           .then((result) => (data = result.parseJsonLines()));
@@ -39,7 +38,6 @@ export const DockerContainers: FC = () => {
         // const fetchResponse = await fetch(getURL);
         // const data: Container[] = await fetchResponse.json();
 
-        console.log(data);
 
         setRunningContainers(data?.filter((container: any) => container.State !== 'exited'));
         setStoppedContainers(data?.filter((container: any) => container.State === 'exited'));
