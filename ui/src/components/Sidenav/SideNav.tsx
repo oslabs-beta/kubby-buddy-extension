@@ -6,7 +6,7 @@
 import React, { FC, useContext, useEffect } from 'react';
 import { GlobalCommands } from '../GlobalCommands/GlobalCommands';
 import { UserContext } from '../../UserContext';
-import favicon from '../../../public/favicon.png';
+import favicon from '../../public/favicon.png';
 import { Container } from '../../types';
 import { createDockerDesktopClient } from '@docker/extension-api-client';
 import ResponsiveAppBar from './Navbar';
