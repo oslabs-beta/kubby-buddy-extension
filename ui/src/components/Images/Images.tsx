@@ -2,6 +2,7 @@ import React, { FC, useContext, useMemo } from 'react';
 import { UserContext } from '../../UserContext';
 import { CreateCommands } from '../../components/Button/Create';
 import { DeleteImageCommands } from '../Button/DeleteImage';
+import { ContainerCreatePopover } from '../Button/materialPopover';
 import { Image } from '../../types';
 import Loader from '../Loader/Loader';
 import { ListItem, Box, Typography, IconButton } from '@mui/material';
@@ -45,9 +46,6 @@ export const Images: FC = () => {
     color: 'red'
   };
 
-  const playButtonStyle = {
-    color: 'green'
-  };
 
   const StoppedContainer: React.FC<{ el: Image; index: number }> = React.memo(({ el, index }) => {
     return (
@@ -75,11 +73,13 @@ export const Images: FC = () => {
         </Box>
         <Box style={cmdbuttonStyle} className='cmdbutton'>
           <IconButton style={deleteButtonStyle} className='delete-button'>
-            <DeleteImageCommands id={el.ID} cmdRoute={new URL('/container/remove-specific-container', window.location.href)} fetchMethod='delete' />
+            <DeleteImageCommands
+              id={el.ID}
+              cmdRoute={new URL('/container/remove-specific-container', window.location.href)}
+              fetchMethod='delete'
+            />
           </IconButton>
-          <IconButton style={playButtonStyle} className='play-button'>
-            <PlayArrowIcon />
-          </IconButton>
+          <ContainerCreatePopover />
         </Box>
       </ListItem>
     );
