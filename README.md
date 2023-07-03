@@ -45,6 +45,8 @@ To preview the extension in Docker Desktop, open Docker Dashboard once the insta
 
 ### Frontend development
 
+### HOT RELOAD
+
 During the development of the frontend part, it's helpful to use hot reloading to test your changes without rebuilding your entire extension. To do this, you can configure Docker Desktop to load your UI from a development server.
 Assuming your app runs on the default port, start your UI app and then run:
 
