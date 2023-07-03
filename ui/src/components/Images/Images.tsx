@@ -42,11 +42,6 @@ export const Images: FC = () => {
     gap: '8px'
   };
 
-  const deleteButtonStyle = {
-    color: 'red'
-  };
-
-
   const StoppedContainer: React.FC<{ el: Image; index: number }> = React.memo(({ el, index }) => {
     return (
       <ListItem style={listItemStyle} key={index}>
@@ -72,14 +67,12 @@ export const Images: FC = () => {
           </Box>
         </Box>
         <Box style={cmdbuttonStyle} className='cmdbutton'>
-          <IconButton style={deleteButtonStyle} className='delete-button'>
-            <DeleteImageCommands
-              id={el.ID}
-              cmdRoute={new URL('/container/remove-specific-container', window.location.href)}
-              fetchMethod='delete'
-            />
-          </IconButton>
-          <ContainerCreatePopover />
+          <DeleteImageCommands
+            id={el.ID}
+            cmdRoute={new URL('/container/remove-specific-container', window.location.href)}
+            fetchMethod='delete'
+          />
+          <ContainerCreatePopover image={el.ID}/>
         </Box>
       </ListItem>
     );

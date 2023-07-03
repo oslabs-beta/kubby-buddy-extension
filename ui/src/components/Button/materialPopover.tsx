@@ -12,12 +12,18 @@ import {
 } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { UserContext } from '../../UserContext';
+import { createDockerDesktopClient } from '@docker/extension-api-client';
+
+import { CommandButtonProps } from '../../types';
+const ddClient = createDockerDesktopClient();
 
 //TODO:
 //send command to create container with values from continername,port,selectedOption, etc.
 //
-
-export const ContainerCreatePopover = () => {
+interface ContainerCreatePopoverProps {
+  image: string;
+}
+export const ContainerCreatePopover: React.FC<ContainerCreatePopoverProps> = ({ image }) => {
   const { availableVolumes } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [containerName, setcontainerName] = useState('');
@@ -32,11 +38,57 @@ export const ContainerCreatePopover = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+    setSelectedOption('');
   };
 
-  const handleSubmit = () => {
-    // You can access the form values from state variables (containerName, port, volumeLocation, selectedOption, removeChecked)
-    // function that will run exec to run container from image
+  const handleSubmit = async () => {
+    let vol;
+    let portNum;
+
+    // check if volume is provided
+    if (selectedOption && selectedOption.trim() !== '') {
+      // check if fileDirectory is provided
+      if (volumeLocation && volumeLocation.trim() !== '') {
+        vol = `${selectedOption}:${volumeLocation}`;
+      } else {
+        vol = `${selectedOption}:/App`;
+      }
+    } else {
+      vol = '';
+    }
+
+    // check if port is provided
+    if (port && port.trim() !== '') {
+      try {
+        const inspectCommand = `--format='{{json .Config.ExposedPorts}}' ${image}`;
+
+        const inspectResult = await ddClient.docker.cli.exec('inspect', inspectCommand.split(' '));
+        const inspectOutput = JSON.parse(inspectResult.stdout);
+
+        const ports = Object.keys(inspectOutput || {});
+        if (ports.length > 0) {
+          const [portString] = ports[0].split('/');
+          portNum = `${port}:${portString}`;
+        }
+      } catch (error) {
+        console.error('Error inspecting image:', error);
+      }
+    } else {
+      portNum = '';
+    }
+
+    try {
+      const runCommand = ` -d ${removeChecked ? '--rm' : ''} ${vol ? `-v ${vol}` : ''} ${
+        portNum ? `-p ${portNum}` : ''
+      } --name ${containerName} ${image}`;
+      console.log(runCommand);
+      const runResult = await ddClient.docker.cli.exec('run', runCommand.split(' '));
+      console.log('stdout:', runResult.stdout);
+      // Set status of complete
+    } catch (error) {
+      console.error('Error running container:', error);
+    }
+
     console.log('Form submitted');
     handleClose();
   };
@@ -50,12 +102,14 @@ export const ContainerCreatePopover = () => {
   const popoverStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
-    gap: '0.5em',
-    alignItems: 'flex-end'
+    padding: '1em'
   };
   const buttonsContainerStyle = {
     display: 'flex',
-    gap: '0.5em'
+    gap: '1em',
+    marginRight: '1em',
+    margin: '1em',
+    alignSelf: 'flex-end'
   };
   return (
     <div>
@@ -75,7 +129,9 @@ export const ContainerCreatePopover = () => {
           vertical: 'top',
           horizontal: 'center'
         }}
-        style={popoverStyle}
+        PaperProps={{
+          style: popoverStyle
+        }}
       >
         <FormControl fullWidth>
           <TextField
