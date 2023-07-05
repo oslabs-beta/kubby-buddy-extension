@@ -80,7 +80,7 @@ export const Images: FC = () => {
             <DeleteImageCommands id={el.ID} cmdRoute={new URL('/container/remove-specific-container', window.location.href)} fetchMethod='delete' />
           {/* </IconButton> */}
           {/* <IconButton style={playButtonStyle} className='play-button'> */}
-            <PlayArrowIcon />
+            {/* <PlayArrowIcon /> */}
           {/* </IconButton> */}
         </Box>
       </ListItem>
