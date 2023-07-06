@@ -1,5 +1,5 @@
-IMAGE?=coachsteve/extension-2
-TAG?=latest
+IMAGE?=kubbybuddy/kubby-buddy-extension
+TAG?=1.0.6
 
 BUILDER=buildx-multi-arch
 

@@ -1,5 +1,5 @@
 {
-  "icon": "docker.svg",
+  "icon": "favicon.svg",
   "vm": {
     "composefile": "docker-compose.yaml",
     "exposes": {
@@ -13,4 +13,5 @@
       "root": "ui"
     }
   }
+  
 }
