@@ -95,13 +95,13 @@ You can use `docker` to build, install and push your extension. Also, we provide
 To build the extension, use `make build-extension` **or**:
 
 ```shell
-  docker buildx build -t coachsteve/extension-2:latest . --load
+  docker buildx build -t kubbybuddy/kubby-buddy-extension:latest . --load
 ```
 
 To install the extension, use `make install-extension` **or**:
 
 ```shell
-  docker extension install coachsteve/extension-2:latest
+  docker extension install kubbybuddy/kubby-buddy-extension:latest
 ```
 
 > If you want to automate this command, use the `-f` or `--force` flag to accept the warning message.
@@ -124,19 +124,19 @@ This starts a development server that listens on port `3000`.
 You can now tell Docker Desktop to use this as the frontend source. In another terminal run:
 
 ```shell
-  docker extension dev ui-source coachsteve/extension-2:latest http://localhost:3000
+  docker extension dev ui-source kubbybuddy/kubby-buddy-extension:latest http://localhost:3000
 ```
 
 In order to open the Chrome Dev Tools for your extension when you click on the extension tab, run:
 
 ```shell
-  docker extension dev debug coachsteve/extension-2:latest
+  docker extension dev debug kubbybuddy/kubby-buddy-extension:latest
 ```
 
 Each subsequent click on the extension tab will also open Chrome Dev Tools. To stop this behaviour, run:
 
 ```shell
-  docker extension dev reset coachsteve/extension-2:latest
+  docker extension dev reset kubbybuddy/kubby-buddy-extension:latest
 ```
 
 ### Backend development (optional)
@@ -149,7 +149,7 @@ Whenever you make changes in the [backend](./backend) source code, you will need
 Use the `docker extension update` command to remove and re-install the extension automatically:
 
 ```shell
-docker extension update coachsteve/extension-2:latest
+docker extension update kubbybuddy/kubby-buddy-extension:latest
 ```
 
 > If you want to automate this command, use the `-f` or `--force` flag to accept the warning message.
@@ -161,7 +161,7 @@ docker extension update coachsteve/extension-2:latest
 To remove the extension:
 
 ```shell
-docker extension rm coachsteve/extension-2:latest
+docker extension rm kubbybuddy/kubby-buddy-extension:latest
 ```
 
 ## Progress
@@ -170,10 +170,10 @@ docker extension rm coachsteve/extension-2:latest
 | ------------------------------------------------------ | ----------------------------------------------------- |
 | Image page                                             | <img src="./assets/bear-party.webp" width="20"/>  |
 | Container page                                         | <img src="./assets/bear-party.webp" width="20"/>  |
-| Volume page                                            | <img src="./assets/bear-party.webp" width="20"/>  |
-| Fix containerized database                             | <img src="./assets/bear-bongo.webp" width="20"/>  |
+| Add containerized database                             | <img src="./assets/bear-bongo.webp" width="20"/>  |
 | Impliment Grafana                                      | <img src="./assets/bear-bongo.webp" width="20"/>  |
 | Bring extention to feature parody                      | <img src="./assets/bear-bongo.webp" width="20"/>  |
+| Volume page                                            | <img src="./assets/bear-snooze.webp" width="20"/> |
 | Add alerts for when buttons fail to load               | <img src="./assets/bear-snooze.webp" width="20"/> |
 | Fix container not loading when started outside the app | <img src="./assets/bear-snooze.webp" width="20"/> |
 | Add more diverse and costomizable commands             | <img src="./assets/bear-snooze.webp" width="20"/> |
