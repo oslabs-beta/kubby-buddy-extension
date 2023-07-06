@@ -1,5 +1,5 @@
 {
-  "icon": "docker.svg",
+  "icon": "favicon.svg",
   "vm": {
     "composefile": "docker-compose.yaml",
     "exposes": {
@@ -8,9 +8,10 @@
   },
   "ui": {
     "dashboard-tab": {
-      "title": "My Extension",
+      "title": "Kubby Buddy",
       "src": "index.html",
       "root": "ui"
     }
   }
+  
 }
