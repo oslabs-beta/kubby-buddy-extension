@@ -1,5 +1,5 @@
 IMAGE?=kubbybuddy/kubby-buddy-extension
-TAG?=1.0.6
+TAG?=1.0.8
 
 BUILDER=buildx-multi-arch
 

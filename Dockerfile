@@ -27,8 +27,8 @@ LABEL org.opencontainers.image.title="Kubby Buddy" \
     com.docker.extension.detailed-description="<h1>Your container management pal</h1>" \
     com.docker.extension.publisher-url="https://kubbybuddy.com" \
     com.docker.extension.additional-urls="" \
-    com.docker.extension.changelog="<p>Extension changelog<ul> <li>New feature A</li> <li>Bug fix on deleting images/li></ul></p>" \
-    com.docker.desktop.extension.icon="https://drive.google.com/file/d/1kvXxK0foZnwQxX3_wGWhfRXiBU--DMrq/view?usp=sharing" \
+    com.docker.extension.changelog="<p>Extension changelog<ul> <li>icon added</li></ul></p>" \
+    com.docker.desktop.extension.icon="https://kubbybuddy.com/assets/kubbybear.svg" \
     com.docker.extension.categories="ci-cd, container-orchestration"
 
 COPY --from=builder /backend backend
