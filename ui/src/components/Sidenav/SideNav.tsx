@@ -233,6 +233,12 @@ export const SideNav: FC = () => {
           >
             Containers
           </Button>
+          <Button
+            onClick={() => setShowing('Volumes')}
+            sx={{ my: 2, color: 'white', display: 'block', marginLeft: '2em' }}
+          >
+            Volumes
+          </Button>
         </Box>
       </Toolbar>
     </AppBar>

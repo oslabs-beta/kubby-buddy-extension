@@ -3,6 +3,7 @@
 import React, { FC, useContext } from 'react';
 import { DockerContainers } from '../Container/DockerContainer';
 import { Images } from '../Images/Images';
+import { Volumes } from '../Volumes/Volumes';
 import { UserContext } from '../../UserContext';
 import { Box, Typography } from '@mui/material';
 
@@ -15,7 +16,13 @@ export const MainNav: FC = () => {
   return (
     <Box className="main-nav">
       <Typography component="ul">
-        {showing === 'Containers' ? <DockerContainers /> : <Images />}
+        {showing === 'Containers' ? (
+          <DockerContainers />
+        ) : showing === 'Images' ? (
+          <Images />
+        ) : showing === 'Volumes' ? (
+          <Volumes />
+        ) : null}
       </Typography>
     </Box>
   );
